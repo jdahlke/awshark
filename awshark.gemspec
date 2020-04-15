@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-cloudformation'
   spec.add_dependency 'aws-sdk-ec2'
   spec.add_dependency 'aws-sdk-s3'
+  spec.add_dependency 'mini_mime'
   spec.add_dependency 'thor', '~> 1.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
