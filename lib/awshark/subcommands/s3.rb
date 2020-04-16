@@ -3,7 +3,7 @@
 require 'aws-sdk-s3'
 require 'mini_mime'
 
-require 'awshark/managers/s3'
+require 'awshark/s3/manager'
 
 module Awshark
   module Subcommands
@@ -55,7 +55,7 @@ module Awshark
       private
 
       def manager
-        @manager ||= Awshark::Managers::S3.new
+        @manager ||= Awshark::S3::Manager.new
       end
     end
   end

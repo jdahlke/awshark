@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'aws-sdk-ec2'
-require 'awshark/managers/ec2'
+require 'awshark/ec2/manager'
 
 module Awshark
   module Subcommands
@@ -28,7 +28,7 @@ module Awshark
       private
 
       def manager
-        @manager ||= Awshark::Managers::EC2.new
+        @manager ||= Awshark::EC2::Manager.new
       end
     end
   end

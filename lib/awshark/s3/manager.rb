@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Awshark
-  module Managers
-    class S3
+  module S3
+    class Manager
       def list_objects(bucket:, prefix: nil)
         response = client.list_objects_v2({
           bucket: bucket,
