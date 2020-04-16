@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Awshark
-  module Managers
-    class EC2
+  module EC2
+    class Manager
       def all_instances
         return @all_instances  if defined?(@all_instances)
 
