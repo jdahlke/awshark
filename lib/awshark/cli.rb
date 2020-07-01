@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+require 'awshark/profile_resolver'
+
 require 'awshark/subcommands/class_options'
-require 'awshark/subcommands/cloud_formation'
 require 'awshark/subcommands/ec2'
 require 'awshark/subcommands/s3'
 

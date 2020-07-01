@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'aws-sdk-ec2'
+
 require 'awshark/ec2/manager'
 
 module Awshark

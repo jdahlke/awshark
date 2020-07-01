@@ -5,25 +5,22 @@ module Awshark
     module ClassOptions
       def process_class_options
         command = current_command_chain.last
-        cli_options = options.merge(parent_options || {})
+        cli_options = options.merge(parent_options || {}).symbolize_keys
 
         if cli_options[:help]
           respond_to?(command) ? help(command) : help
           exit(0)
         end
 
-        set_aws_profile(cli_options[:profile]) if cli_options[:profile]
-        set_aws_region(cli_options[:region]) if cli_options[:region]
+        setup_aws_credentials(options)
       end
 
       private
-      def set_aws_profile(profile_name)
-        credentials = ::Aws::SharedCredentials.new(profile_name: profile_name)
-        ::Aws.config[:credentials] = credentials
-      end
+      def setup_aws_credentials(options)
+        profile_resolver = ProfileResolver.new(options)
 
-      def set_aws_region(region)
-        ::Aws.config[:region] = region
+        ::Aws.config[:region] = profile_resolver.region
+        ::Aws.config[:credentials] = profile_resolver.credentials
       end
     end
   end
