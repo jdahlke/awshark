@@ -19,13 +19,8 @@ module Awshark
       def check
         process_class_options
 
-        instances = manager.instances
-        pattern = "%-30s %-15s %-10s %-10s %s\n"
         puts "\n+++ Instances +++"
-        printf pattern, 'Name', 'Type', 'Engine', 'MultiAZ', 'State'
-        instances.each do |i|
-          printf pattern, i.name, i.type, i.engine, i.multi_az, i.state
-        end
+        list
 
         checks = manager.check_reservations
         pattern = "%-15s %-15s %-15s %-15s %s\n"
@@ -55,10 +50,10 @@ module Awshark
         instances = manager.instances
         instances = instances.sort_by(&:name)
 
-        pattern = "%-30s %-15s %-10s %-10s %s\n"
-        printf pattern, 'Name', 'Type', 'Engine', 'MultiAZ', 'State'
+        pattern = "%-30s %-15s %-20s %-10s %-10s %s\n"
+        printf pattern, 'Name', 'Type', 'Engine (Version)', 'MultiAZ', 'Encrypted', 'State'
         instances.each do |i|
-          printf pattern, i.name, i.type, i.engine, i.multi_az, i.state
+          printf pattern, i.name, i.type, "#{i.engine} (#{i.engine_version})", i.multi_az, i.encrypted, i.state
         end
       end
 
