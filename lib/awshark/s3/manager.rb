@@ -3,6 +3,13 @@
 module Awshark
   module S3
     class Manager
+      def list_buckets
+        response = client.list_buckets
+        response.buckets.map do |bucket|
+          Awshark::S3::Bucket.new(bucket)
+        end
+      end
+
       def list_objects(bucket:, prefix: nil)
         objects = []
         response = client.list_objects_v2(bucket: bucket, prefix: prefix)
