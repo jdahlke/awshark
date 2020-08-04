@@ -3,6 +3,7 @@
 require 'aws-sdk-s3'
 require 'mini_mime'
 
+require 'awshark/s3/artifact'
 require 'awshark/s3/manager'
 
 module Awshark
@@ -11,23 +12,24 @@ module Awshark
       include Awshark::Subcommands::ClassOptions
       include ActiveSupport::NumberHelper
 
-      desc 'list', 'List objects of an S3 bucket'
+      desc 'objects', 'List objects of an S3 bucket'
       long_desc <<-LONGDESC
         List objects of an S3 bucket
 
-        Example: `awshark s3 list BUCKET PREFIX`
+        Example: `awshark s3 objects BUCKET PREFIX`
       LONGDESC
-      def list(bucket, prefix = '/')
+      def objects(bucket, prefix = '')
         process_class_options
 
         objects = manager.list_objects(bucket: bucket, prefix: prefix)
 
         objects.each do |o|
-          uri = "#{bucket}/#{o.key}"
           filesize = number_to_human_size(o.size)
-
-          printf "%-120s %s\n", uri, filesize
+          printf "  %-10<size>s %<key>s\n", key: o.key, size: filesize
         end
+        printf "\n\n  Total:\n"
+        printf "  %<size>s objects\n", size: objects.size
+        printf "  %<size>s\n", size: number_to_human_size(objects.map(&:size).sum)
       end
 
       desc 'update_metadata', 'Update metadata of S3 objects'
@@ -48,7 +50,7 @@ module Awshark
         objects.each do |o|
           manager.update_object_metadata(bucket, o.key, meta)
 
-          printf "  %-120s \n", "#{bucket}/#{o.key}"
+          printf " %<key>s \n", key: o.key
         end
       end
 
