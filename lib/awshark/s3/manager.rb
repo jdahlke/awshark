@@ -6,7 +6,10 @@ module Awshark
       def list_buckets
         response = client.list_buckets
         response.buckets.map do |bucket|
-          Awshark::S3::Bucket.new(bucket)
+          attributes = OpenStruct.new(bucket.to_hash)
+          location = client.get_bucket_location(bucket: bucket.name)
+          attributes.region = location.location_constraint
+          Awshark::S3::Bucket.new(attributes)
         end
       end
 

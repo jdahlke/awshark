@@ -24,13 +24,15 @@ module Awshark
         process_class_options
 
         buckets = manager.list_buckets
-        printf "  %-40<name>s %-10<size>s %<number_of_objects>s\n",
+        printf "  %-40<name>s %-13<region>s %-10<size>s %<number_of_objects>s\n",
                name: 'Bucket',
+               region: 'Region',
                size: 'Size',
                number_of_objects: 'Number of Objects'
         buckets.each do |bucket|
-          printf "  %-40<name>s %-10<size>s %<number_of_objects>i\n",
+          printf "  %-40<name>s %-13<region>s %-10<size>s %<number_of_objects>i\n",
                  name: bucket.name,
+                 region: bucket.region,
                  size: number_to_human_size(bucket.byte_size),
                  number_of_objects: bucket.number_of_objects
         end

@@ -3,11 +3,15 @@
 module Awshark
   module S3
     class Bucket
-      attr_reader :name, :creation_date
+      attr_reader :name, :creation_date, :region
 
       def initialize(attributes)
         @name = attributes.name
         @creation_date = attributes.creation_date
+        @region = attributes.region
+
+        # fixes S3 quirks
+        @region = 'eu-west-1' if @region == 'EU'
       end
 
       def byte_size
@@ -21,12 +25,12 @@ module Awshark
       private
 
       def cloudwatch
-        @cloudwatch ||= Aws::CloudWatch::Client.new(
-          region: Aws.config[:region] || 'eu-central-1'
-        )
+        @cloudwatch ||= Aws::CloudWatch::Client.new(region: region)
       end
 
       def metric_value(metric_name:, storage_type:)
+        return 0 unless region.present?
+
         response = cloudwatch.get_metric_statistics(
           namespace: 'AWS/S3',
           metric_name: metric_name,
