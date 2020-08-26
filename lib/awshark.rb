@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'awshark/version'
 
 require 'active_support/all'
