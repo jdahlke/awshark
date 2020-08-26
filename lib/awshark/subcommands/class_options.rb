@@ -16,6 +16,7 @@ module Awshark
       end
 
       private
+
       def setup_aws_credentials(options)
         profile_resolver = ProfileResolver.new(options)
 
