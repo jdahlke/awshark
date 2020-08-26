@@ -1,5 +1,7 @@
 # Awshark
 
+[![GitHub Actions Test Status](https://github.com/jdahlke/awshark/workflows/Tests/badge.svg?branch=develop)](https://github.com/jdahlke/awshark/actions)
+
 Simple commandline for some useful AWS tasks for *EC2* and *S3*.
 
 
