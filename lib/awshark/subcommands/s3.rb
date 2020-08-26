@@ -24,17 +24,21 @@ module Awshark
         process_class_options
 
         buckets = manager.list_buckets
-        printf "  %-40<name>s %-13<region>s %-10<size>s %<number_of_objects>s\n",
-               name: 'Bucket',
-               region: 'Region',
-               size: 'Size',
-               number_of_objects: 'Number of Objects'
+        args = {
+          name: 'Bucket',
+          region: 'Region',
+          size: 'Size',
+          number_of_objects: 'Number of Objects'
+        }
+        printf "  %-40<name>s %-13<region>s %-10<size>s %<number_of_objects>s\n", args
         buckets.each do |bucket|
-          printf "  %-40<name>s %-13<region>s %-10<size>s %<number_of_objects>i\n",
-                 name: bucket.name,
-                 region: bucket.region,
-                 size: number_to_human_size(bucket.byte_size),
-                 number_of_objects: bucket.number_of_objects
+          args = {
+            name: bucket.name,
+            region: bucket.region,
+            size: number_to_human_size(bucket.byte_size),
+            number_of_objects: bucket.number_of_objects
+          }
+          printf "  %-40<name>s %-13<region>s %-10<size>s %<number_of_objects>i\n", args
         end
       end
 
@@ -75,7 +79,6 @@ module Awshark
         puts 'Updating ...'
         objects.each do |o|
           manager.update_object_metadata(bucket, o.key, meta)
-
           printf " %<key>s \n", key: o.key
         end
       end

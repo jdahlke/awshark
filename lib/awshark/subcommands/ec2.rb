@@ -2,6 +2,7 @@
 
 require 'aws-sdk-ec2'
 
+require 'awshark/ec2/instance'
 require 'awshark/ec2/manager'
 
 module Awshark
@@ -22,7 +23,8 @@ module Awshark
         instances = instances.sort_by(&:name)
 
         instances.each do |i|
-          printf "%-40s %-12s %-60s %s\n", i.name, i.type, i.public_dns_name, i.state
+          args = { name: i.name, type: i.type, public_dns: i.public_dns_name, state: i.state }
+          printf "%-40<name>s %-12<type>s %-60<public_dns>s %<state>s\n", args
         end
       end
 

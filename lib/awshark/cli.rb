@@ -9,7 +9,6 @@ require 'awshark/subcommands/s3'
 
 module Awshark
   class Cli < Thor
-
     package_name 'Awshark'
 
     map '-v' => :version
@@ -18,9 +17,6 @@ module Awshark
     class_option :profile, type: :string, desc: 'Load the AWS credentials profile named PROFILE.'
     class_option :region, type: :string, desc: 'Sets the AWS region name REGION.'
     class_option :stage, type: :string, desc: 'The AWS stage for the configuration'
-
-#    desc 'cf COMMAND', 'Run CloudFormation command'
-#    subcommand 'cf', Awshark::Subcommands::CloudFormation
 
     desc 'ec2 COMMAND', 'Run EC2 command'
     subcommand 'ec2', Awshark::Subcommands::EC2

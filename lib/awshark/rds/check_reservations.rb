@@ -32,12 +32,12 @@ module Awshark
           instance_count = count_instances(type, multi_az)
           reserved_count = count_reservations(type, multi_az)
 
-          OpenStruct.new({
+          OpenStruct.new(
             type: type,
             multi_az: multi_az,
             instance_count: instance_count,
             reserved_count: reserved_count
-          })
+          )
         end
       end
 
