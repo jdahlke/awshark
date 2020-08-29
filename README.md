@@ -7,19 +7,7 @@ Simple commandline for some useful AWS tasks for *EC2* and *S3*.
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'awshark'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install awshark
+    gem install awshark
 
 
 ## Usage
@@ -37,9 +25,14 @@ exe/awshark s3 update_metadata static.bundesimmobilien.de fonts/ --meta=cache_co
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies.
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run
+
+    gem build awshark.gemspec
+    gem install --local awshark-0.1.0.gem
+    rm awshark-0.1.0.gem
 
 
 ## Contributing
