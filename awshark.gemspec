@@ -33,11 +33,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-ec2'
   spec.add_dependency 'aws-sdk-rds'
   spec.add_dependency 'aws-sdk-s3'
+  spec.add_dependency 'diffy'
   spec.add_dependency 'mini_mime'
   spec.add_dependency 'thor', '~> 1.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rake', '>= 12.3.3'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop', '0.86.0'
 end
