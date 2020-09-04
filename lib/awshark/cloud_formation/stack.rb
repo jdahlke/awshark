@@ -39,9 +39,7 @@ module Awshark
       end
 
       def events
-        response = client.describe_stack_events(
-          stack_name: stack_id
-        )
+        response = client.describe_stack_events(stack_name: stack_id)
         response.stack_events
       end
 
@@ -55,13 +53,17 @@ module Awshark
 
       def reload
         @stack = get_stack(name)
+
+        self
       end
 
       # @return [Hash]
       def template
         return nil unless exists?
+        return @template if @template.present?
 
-        @template ||= get_stack_template(name)
+        response = client.get_template(stack_name: stack_id)
+        @template = response.template_body
       end
 
       private
@@ -84,11 +86,6 @@ module Awshark
         end
 
         response.stacks[0]
-      end
-
-      def get_stack_template(stack_name)
-        response = client.get_template(stack_name: stack_name)
-        response.template_body
       end
     end
   end

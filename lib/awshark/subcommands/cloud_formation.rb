@@ -4,6 +4,7 @@ require 'aws-sdk-cloudformation'
 require 'diffy'
 
 require 'awshark/cloud_formation/file_loader'
+require 'awshark/cloud_formation/inferrer'
 require 'awshark/cloud_formation/manager'
 require 'awshark/cloud_formation/parameters'
 require 'awshark/cloud_formation/stack'

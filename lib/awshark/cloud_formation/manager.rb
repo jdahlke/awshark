@@ -18,17 +18,13 @@ module Awshark
                           []
                         end
 
-        @stack = Stack.new(
-          name: name_from_file(path)
-        )
+        @stack = Stack.new(name: inferrer.stack_name)
       end
 
       def diff_stack_template
         new_template = JSON.pretty_generate(file_loader.template)
         old_template = stack.template
-        options = {
-          context: 2
-        }
+        options = { context: 2 }
 
         diff = Diffy::Diff.new(old_template, new_template, options)
         diff.to_s(:color)
@@ -77,11 +73,8 @@ module Awshark
         @file_loader ||= FileLoader.new(path)
       end
 
-      def name_from_file(path)
-        file_extension = File.extname(path)
-        name = File.basename(path, file_extension)
-
-        [name, stage].compact.join('-').gsub('_', '-')
+      def inferrer
+        @inferrer ||= Inferrer.new(path, stage)
       end
 
       def print_stack_events(events)
