@@ -69,6 +69,8 @@ module Awshark
       private
 
       def client
+        return Awshark.config.cloud_formation.client if Awshark.config.cloud_formation.client
+
         region = Aws.config[:region]
         @client ||= Aws::CloudFormation::Client.new(region: region)
       end

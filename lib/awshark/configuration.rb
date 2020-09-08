@@ -6,6 +6,7 @@ module Awshark
 
     def initialize
       @cloud_formation = OpenStruct.new(
+        client: nil,
         event_polling: 3
       )
     end
