@@ -3,23 +3,27 @@
 module Awshark
   module CloudFormation
     class Parameters
+      include FileLoading
+
       attr_reader :stage
 
-      def initialize(data:, stage:)
-        if stage
-          @stage = stage
-          @params = params_for_stage(data)
-        else
-          @params = data || {}
+      def initialize(path:, stage: nil)
+        @filepath = Dir.glob("#{path}/parameters.*").detect do |f|
+          %w[.json .yml .yaml].include?(File.extname(f))
         end
+        @stage = stage
+      end
+
+      def params
+        @params ||= load_parameters(@filepath)
       end
 
       def to_hash
-        @params
+        params
       end
 
       def stack_parameters
-        @params.each.map do |k, v|
+        params.each.map do |k, v|
           {
             parameter_key: k,
             parameter_value: v
@@ -29,13 +33,10 @@ module Awshark
 
       private
 
-      def params_for_stage(data)
-        params = if data.key?(stage)
-                   data[stage]
-                 else
-                   data
-                 end
-        params.merge(Stage: stage)
+      def load_parameters(filepath)
+        data = load_file(filepath) || {}
+
+        data[stage] || data
       end
     end
   end
