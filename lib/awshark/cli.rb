@@ -3,6 +3,7 @@
 require 'awshark/profile_resolver'
 
 require 'awshark/subcommands/class_options'
+require 'awshark/subcommands/cloud_formation'
 require 'awshark/subcommands/ec2'
 require 'awshark/subcommands/rds'
 require 'awshark/subcommands/s3'
@@ -16,7 +17,9 @@ module Awshark
     class_option :help, type: :boolean, desc: 'Prints this help'
     class_option :profile, type: :string, desc: 'Load the AWS credentials profile named PROFILE.'
     class_option :region, type: :string, desc: 'Sets the AWS region name REGION.'
-    class_option :stage, type: :string, desc: 'The AWS stage for the configuration'
+
+    desc 'cf COMMAND', 'Run CloudFormation command'
+    subcommand 'cf', Awshark::Subcommands::CloudFormation
 
     desc 'ec2 COMMAND', 'Run EC2 command'
     subcommand 'ec2', Awshark::Subcommands::EC2

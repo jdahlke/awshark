@@ -5,7 +5,10 @@ module Awshark
     attr_accessor :cloud_formation
 
     def initialize
-      @cloud_formation = OpenStruct.new
+      @cloud_formation = OpenStruct.new(
+        client: nil,
+        event_polling: 3
+      )
     end
   end
 end

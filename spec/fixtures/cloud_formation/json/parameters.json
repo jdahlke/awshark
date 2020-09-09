@@ -1,0 +1,7 @@
+{
+  "HashKeyElementName": "foo",
+  "HashKeyElementType": "N",
+  "ReadCapacityUnits": 1,
+  "WriteCapacityUnits": 1
+}
+

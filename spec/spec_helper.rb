@@ -2,7 +2,17 @@
 
 require 'awshark'
 
+require 'support/mocks'
+
 RSpec.configure do |config|
+  config.before(:suite) do
+    Mocks.stub_cloudformation
+  end
+
+  config.after(:suite) do
+    Mocks.unstub_cloudformation
+  end
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
