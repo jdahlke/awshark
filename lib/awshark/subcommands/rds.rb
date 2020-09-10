@@ -27,14 +27,7 @@ module Awshark
         puts "\n+++ Check +++"
         printf pattern, 'Reserved', 'Instances', 'Type', 'MultiAZ', 'Comment'
         checks.each do |c|
-          comment = if c.reserved_count > c.instance_count
-                      "#{c.reserved_count - c.instance_count} instances available"
-                    elsif c.reserved_count < c.instance_count
-                      "#{c.instance_count - c.reserved_count} instances too many!!!"
-                    else
-                      ''
-                    end
-          printf pattern, c.reserved_count, c.instance_count, c.type, c.multi_az, comment
+          printf pattern, c.reserved_count, c.instance_count, c.type, c.multi_az, comment(c)
         end
       end
 
@@ -79,6 +72,16 @@ module Awshark
 
       def manager
         @manager ||= Awshark::Rds::Manager.new
+      end
+
+      def comment(check)
+        if check.reserved_count > check.instance_count
+          "#{check.reserved_count - check.instance_count} instances available"
+        elsif check.reserved_count < check.instance_count
+          "#{check.instance_count - check.reserved_count} instances too many!!!"
+        else
+          ''
+        end
       end
     end
   end
