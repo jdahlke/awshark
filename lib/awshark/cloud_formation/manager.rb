@@ -22,7 +22,7 @@ module Awshark
       end
 
       def diff_stack_template
-        new_template = JSON.pretty_generate(file_loader.template)
+        new_template = template.body
         old_template = stack.template
         options = { context: 2 }
 
@@ -31,16 +31,10 @@ module Awshark
       end
 
       def update_stack
-        template_body = JSON.pretty_generate(file_loader.template)
-        parameters = Parameters.new(
-          data: file_loader.parameters,
-          stage: stage
-        )
-
         stack.create_or_update(
           capabilities: capabilities,
           stack_name: stack.name,
-          template_body: template_body,
+          template_body: template.body,
           parameters: parameters.stack_parameters
         )
       rescue Aws::CloudFormation::Errors::ValidationError => e
@@ -69,12 +63,16 @@ module Awshark
         Awshark.config.cloud_formation.event_polling || 3
       end
 
-      def file_loader
-        @file_loader ||= FileLoader.new(path)
-      end
-
       def inferrer
         @inferrer ||= Inferrer.new(path, stage)
+      end
+
+      def parameters
+        @parameters ||= Parameters.new(path: path, stage: stage)
+      end
+
+      def template
+        @template ||= Template.new(path: path, stage: stage)
       end
 
       def print_stack_events(events)

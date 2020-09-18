@@ -1,1 +1,2 @@
-AlarmEMail: 'foo@example.com'
+test:
+  AlarmEMail: 'foo@example.com'

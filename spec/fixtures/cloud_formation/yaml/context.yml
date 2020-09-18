@@ -1,0 +1,7 @@
+test:
+  QueueName: 'Foo'
+  Instances:
+    - Name: 'foo'
+      Type: 'small'
+    - Name: 'bar'
+      Type: 'medium'

@@ -13,7 +13,8 @@ Parameters:
 Resources:
   TestQueue:
     Type: AWS::SQS::Queue
-    Properties: {}
+    Properties:
+      QueueName: <%= context['QueueName'] %>
   AlarmTopic:
     Type: AWS::SNS::Topic
     Properties:

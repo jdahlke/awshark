@@ -33,7 +33,8 @@ Lint/StructNewOverride:
   Enabled: true
 
 Metrics/AbcSize:
-  Enabled: false
+  Enabled: true
+  Max: 20
 Metrics/MethodLength:
   Enabled: false
 Metrics/ModuleLength:
