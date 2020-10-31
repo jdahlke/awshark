@@ -39,6 +39,7 @@ module Awshark
         )
       rescue Aws::CloudFormation::Errors::ValidationError => e
         raise GracefulFail, e.message if e.message.match(/No updates are to be performed/)
+        raise GracefulFail, e.message if e.message.match(/ROLLBACK_COMPLETE state and can not be updated/)
 
         raise e
       end
