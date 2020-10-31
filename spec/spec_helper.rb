@@ -6,11 +6,11 @@ require 'support/mocks'
 
 RSpec.configure do |config|
   config.before(:suite) do
-    Mocks.stub_cloudformation
+    Mocks.stub_aws
   end
 
   config.after(:suite) do
-    Mocks.unstub_cloudformation
+    Mocks.unstub_aws
   end
 
   config.expect_with :rspec do |expectations|

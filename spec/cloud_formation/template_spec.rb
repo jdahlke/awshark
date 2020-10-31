@@ -68,7 +68,11 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { json_path }
 
       it do
-        is_expected.to eq({ context: { 'S3Bucket' => 'foo.bar.org' }, stage: 'test' })
+        is_expected.to eq({
+          aws_account_id: 'accountType',
+          context: { 'S3Bucket' => 'foo.bar.org' },
+          stage: 'test'
+        })
       end
     end
 
@@ -77,6 +81,7 @@ RSpec.describe Awshark::CloudFormation::Template do
 
       it do
         is_expected.to eq({
+          aws_account_id: 'accountType',
           context: {
             'QueueName' => 'Foo',
             'Instances' => [
@@ -92,13 +97,13 @@ RSpec.describe Awshark::CloudFormation::Template do
     context 'with file path' do
       let(:path) { 'spec/fixtures/cloud_formation/yaml/template.yml' }
 
-      it { is_expected.to eq({ context: {}, stage: 'test' }) }
+      it { is_expected.to eq({ aws_account_id: 'accountType', context: {}, stage: 'test' }) }
     end
 
     context 'with no context file' do
       let(:path) { 'spec/fixtures/cloud_formation/empty' }
 
-      it { is_expected.to eq({ context: {}, stage: 'test' }) }
+      it { is_expected.to eq({ aws_account_id: 'accountType', context: {}, stage: 'test' }) }
     end
   end
 end
