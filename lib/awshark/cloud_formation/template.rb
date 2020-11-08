@@ -43,6 +43,7 @@ module Awshark
 
         {
           context: HashWithIndifferentAccess.new(context),
+          aws_account_id: Awshark.config.aws_account_id,
           stage: stage
         }
       end
