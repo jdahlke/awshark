@@ -2,12 +2,16 @@
 
 module Awshark
   class Configuration
-    attr_accessor :cloud_formation
+    attr_accessor :cloud_formation, :s3
 
     def initialize
       @cloud_formation = OpenStruct.new(
         client: nil,
         event_polling: 3
+      )
+
+      @s3 = OpenStruct.new(
+        client: nil
       )
     end
 
