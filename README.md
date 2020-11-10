@@ -2,7 +2,7 @@
 
 [![GitHub Actions Test Status](https://github.com/jdahlke/awshark/workflows/Tests/badge.svg?branch=develop)](https://github.com/jdahlke/awshark/actions)
 
-Simple commandline for some useful AWS tasks for *EC2* and *S3*.
+Simple Commandline tool for some useful tasks for AWS *EC2*, *S3* and *CloudFormation*.
 
 
 ## Installation
@@ -12,14 +12,27 @@ Simple commandline for some useful AWS tasks for *EC2* and *S3*.
 
 ## Usage
 
-1. List S3 objects
+These are just are few quick examples.
+For a further information visit the [Wiki](https://github.com/jdahlke/awshark/wiki).
+
+1. List all commands
 ```
-exe/awshark s3 list static.bundesimmobilien.de fonts/ --profile=bima
+awshark help
 ```
 
-2. Update cache control for S3 object
+2. List all S3 buckets
 ```
-exe/awshark s3 update_metadata static.bundesimmobilien.de fonts/ --meta=cache_control:"public, max-age=2592000, s-maxage=2592000" acl:public-read --profile=bima
+awshark s3 list --profile=AWS_PROFILE
+```
+
+3. List all objects in a specific S3 bucket
+```
+awshark s3 objects BUCKET_NAME fonts/ --profile=AWS_PROFILE
+```
+
+4. List all EC2 instances in a region
+```
+awshark ec2 list --profile=AWS_PROFILE
 ```
 
 
