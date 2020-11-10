@@ -6,13 +6,15 @@
 module Awshark
   module CloudFormation
     class Manager
-      attr_reader :path, :stage, :capabilities
-      attr_reader :stack
+      attr_reader :path, :options
+      attr_reader :stack, :stage, :capabilities
 
-      def initialize(path:, stage: nil, iam: false)
+      def initialize(path, options = {})
         @path = path
-        @stage = stage
-        @capabilities = if iam
+        @options = options
+        @stage = options[:stage]
+
+        @capabilities = if options[:iam]
                           %w[CAPABILITY_IAM CAPABILITY_NAMED_IAM]
                         else
                           []
@@ -34,7 +36,7 @@ module Awshark
         stack.create_or_update(
           capabilities: capabilities,
           stack_name: stack.name,
-          template_body: template.body,
+          template_url: template.url,
           parameters: parameters.stack_parameters
         )
       rescue Aws::CloudFormation::Errors::ValidationError => e
@@ -73,7 +75,7 @@ module Awshark
       end
 
       def template
-        @template ||= Template.new(path: path, stage: stage)
+        @template ||= Template.new(path, options.merge(name: stack.name))
       end
 
       def print_stack_events(events)

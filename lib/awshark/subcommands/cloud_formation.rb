@@ -16,6 +16,8 @@ module Awshark
     class CloudFormation < Thor
       include Awshark::Subcommands::ClassOptions
 
+      class_option :bucket, type: :string, desc: 'S3 bucket for template'
+      class_option :iam, type: :boolean, desc: 'Needs IAM capabilities'
       class_option :stage, type: :string, desc: 'Stage of the configuration'
 
       desc 'deploy', 'Updates or creates an AWS CloudFormation stack'
@@ -30,10 +32,10 @@ module Awshark
 
           awshark cf deploy iam_template IAM
       LONGDESC
-      def deploy(template_path, iam = '')
+      def deploy(template_path)
         process_class_options
 
-        manager = create_manager(template_path, iam == 'IAM')
+        manager = create_manager(template_path)
         print_stack_information(manager.stack)
 
         manager.update_stack
@@ -61,12 +63,8 @@ module Awshark
 
       private
 
-      def create_manager(template_path, iam = false)
-        Awshark::CloudFormation::Manager.new(
-          path: template_path,
-          stage: options['stage'],
-          iam: iam
-        )
+      def create_manager(template_path)
+        Awshark::CloudFormation::Manager.new(template_path, options.symbolize_keys)
       end
 
       def print_stack_information(stack)
