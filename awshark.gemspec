@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.bindir = 'exe'
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+  spec.required_ruby_version = '>= 2.6'
 
   spec.add_dependency 'activesupport'
   spec.add_dependency 'aws-sdk-cloudformation'
@@ -38,6 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'thor', '~> 1.0'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop', '0.86.0'
+  spec.add_development_dependency 'rspec', '~> 3.9.0'
+  spec.add_development_dependency 'rubocop', '0.93.1'
 end

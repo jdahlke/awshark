@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Awshark::CloudFormation::Template do
-  let(:template) { described_class.new(path: path, stage: stage) }
+  let(:template) { described_class.new(path, name: 'foo', stage: stage) }
   let(:stage) { nil }
 
   json_path = 'spec/fixtures/cloud_formation/json'
@@ -104,6 +104,29 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { 'spec/fixtures/cloud_formation/empty' }
 
       it { is_expected.to eq({ aws_account_id: 'accountType', context: {}, stage: 'test' }) }
+    end
+  end
+
+  describe '#url' do
+    subject { template.url }
+    let(:path) { yaml_path }
+
+    context 'without bucket' do
+      it 'raises ArgumentError' do
+        expect { subject }.to raise_error(ArgumentError)
+      end
+    end
+
+    context 'with bucket' do
+      let(:bucket) { 'foobar' }
+      let(:template) do
+        described_class.new(path, name: 'foo', stage: stage, bucket: bucket)
+      end
+
+      it 'returns S3 object url of template' do
+        s3_key = "awshark/foo/#{Time.now.strftime('%Y-%m-%d')}.json"
+        is_expected.to eq("https://#{bucket}.s3.eu-central-1.amazonaws.com/#{s3_key}")
+      end
     end
   end
 end

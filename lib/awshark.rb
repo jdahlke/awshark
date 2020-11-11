@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/all'
+require 'logger'
 require 'thor'
 require 'yaml'
 
@@ -16,6 +17,18 @@ module Awshark
 
   def self.configure
     yield config
+  end
+
+  def self.logger
+    return @logger if @logger
+
+    @logger = ::Logger.new($stdout)
+    @logger.level = Logger::INFO
+    @logger.formatter = proc do |_severity, _datetime, _progname, msg|
+      "[awshark] #{msg}\n"
+    end
+
+    @logger
   end
 end
 

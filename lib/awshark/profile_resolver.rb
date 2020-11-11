@@ -48,7 +48,7 @@ module Awshark
 
     def mfa_token
       print %(Please enter MFA token for AWS account #{@profile}: )
-      STDIN.gets.strip
+      $stdin.gets.strip
     end
   end
 end
