@@ -16,7 +16,7 @@ module Awshark
       def list_objects(bucket:, prefix: nil)
         objects = []
         response = client.list_objects_v2(bucket: bucket, prefix: prefix)
-        objects = objects.concat(response.contents)
+        objects.concat(response.contents)
 
         while response.next_continuation_token
           response = client.list_objects_v2(
@@ -24,7 +24,7 @@ module Awshark
             prefix: prefix,
             continuation_token: response.next_continuation_token
           )
-          objects = objects.concat(response.contents)
+          objects.concat(response.contents)
         end
 
         objects.select { |o| o.size.positive? }

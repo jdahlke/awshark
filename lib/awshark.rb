@@ -22,7 +22,7 @@ module Awshark
   def self.logger
     return @logger if @logger
 
-    @logger = ::Logger.new(STDOUT)
+    @logger = ::Logger.new($stdout)
     @logger.level = Logger::INFO
     @logger.formatter = proc do |_severity, _datetime, _progname, msg|
       "[awshark] #{msg}\n"
