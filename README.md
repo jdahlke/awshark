@@ -2,7 +2,7 @@
 
 [![GitHub Actions Test Status](https://github.com/jdahlke/awshark/workflows/Tests/badge.svg?branch=develop)](https://github.com/jdahlke/awshark/actions)
 
-Simple Commandline tool for some useful tasks for AWS *EC2*, *S3* and *CloudFormation*.
+Simple command-line tool for some useful tasks for AWS *EC2*, *S3* and *CloudFormation*.
 
 
 ## Installation

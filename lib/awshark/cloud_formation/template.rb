@@ -70,7 +70,8 @@ module Awshark
       end
 
       def s3_key
-        "awshark/#{name}.json"
+        # https://apidock.com/ruby/Time/strftime
+        @s3_key ||= "awshark/#{name}/#{Time.now.strftime('%Y-%m-%d')}.json"
       end
 
       def upload
