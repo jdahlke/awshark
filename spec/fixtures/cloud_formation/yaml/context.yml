@@ -1,7 +1,10 @@
+defaults:
+  type: &default_type 'medium'
+
 test:
   QueueName: 'Foo'
   Instances:
     - Name: 'foo'
       Type: 'small'
     - Name: 'bar'
-      Type: 'medium'
+      Type: *default_type

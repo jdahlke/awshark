@@ -13,7 +13,7 @@ module Awshark
         when '.json'
           JSON.parse(content)
         when '.yml', '.yaml'
-          YAML.safe_load(content, [Date, Time])
+          YAML.safe_load(content, permitted_classes: [Date, Time], aliases: true)
         else
           raise ArgumentError, "Unsupported file extension for #{filepath}"
         end
