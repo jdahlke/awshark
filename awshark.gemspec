@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary = 'Custom CLI for for AWS related tasks'
   spec.description = 'Custom CLI for for AWS to simplify common tasks with EC2, S3 and Cloud Formation'
   spec.homepage = 'https://github.com/jdahlke/awshark'
+  spec.license = 'MIT'
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/jdahlke/awshark'
