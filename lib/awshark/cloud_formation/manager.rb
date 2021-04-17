@@ -81,7 +81,7 @@ module Awshark
       def print_stack_events(events)
         $stdout.sync
         events.each do |event|
-          printf "%-30<type>s %-30<logical_id>s %-20<status>s %<reason>s\n",
+          printf "%-50<type>s %-30<logical_id>s %-20<status>s %<reason>s\n",
                  type: event.resource_type,
                  logical_id: event.logical_resource_id,
                  status: event.resource_status,
