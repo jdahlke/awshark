@@ -29,9 +29,11 @@ module Awshark
       private
 
       def client
-        @client ||= Aws::EC2::Client.new(
-          region: Aws.config[:region] || 'eu-central-1'
-        )
+        @client ||= Aws::EC2::Client.new(region: region)
+      end
+
+      def region
+        Aws.config[:region] || 'eu-central-1'
       end
     end
   end
