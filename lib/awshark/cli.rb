@@ -5,6 +5,7 @@ require 'awshark/profile_resolver'
 require 'awshark/subcommands/class_options'
 require 'awshark/subcommands/cloud_formation'
 require 'awshark/subcommands/ec2'
+require 'awshark/subcommands/ecs'
 require 'awshark/subcommands/rds'
 require 'awshark/subcommands/s3'
 
@@ -23,6 +24,9 @@ module Awshark
 
     desc 'ec2 COMMAND', 'Run EC2 command'
     subcommand 'ec2', Awshark::Subcommands::EC2
+
+    desc 'ecs COMMAND', 'Run ECS command'
+    subcommand 'ecs', Awshark::Subcommands::Ecs
 
     desc 'rds COMMAND', 'Run RDS command'
     subcommand 'rds', Awshark::Subcommands::Rds
