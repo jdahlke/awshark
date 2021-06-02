@@ -70,7 +70,7 @@ RSpec.describe Awshark::CloudFormation::Template do
       it do
         is_expected.to eq({
           aws_account_id: 'accountType',
-          context: { 'S3Bucket' => 'foo.bar.org' },
+          context: RecursiveOpenStruct.new({ 'S3Bucket' => 'foo.bar.org' }),
           stage: 'test'
         })
       end
@@ -82,13 +82,13 @@ RSpec.describe Awshark::CloudFormation::Template do
       it do
         is_expected.to eq({
           aws_account_id: 'accountType',
-          context: {
+          context: RecursiveOpenStruct.new({
             'QueueName' => 'Foo',
             'Instances' => [
               { 'Name'=>'foo', 'Type'=>'small' },
               { 'Name'=>'bar', 'Type'=>'medium' }
             ],
-          },
+          }),
           stage: 'test'
         })
       end
@@ -97,13 +97,25 @@ RSpec.describe Awshark::CloudFormation::Template do
     context 'with file path' do
       let(:path) { 'spec/fixtures/cloud_formation/yaml/template.yml' }
 
-      it { is_expected.to eq({ aws_account_id: 'accountType', context: {}, stage: 'test' }) }
+      it do
+        is_expected.to eq({
+          aws_account_id: 'accountType',
+          context: RecursiveOpenStruct.new,
+          stage: 'test'
+        })
+      end
     end
 
     context 'with no context file' do
       let(:path) { 'spec/fixtures/cloud_formation/empty' }
 
-      it { is_expected.to eq({ aws_account_id: 'accountType', context: {}, stage: 'test' }) }
+      it do
+        is_expected.to eq({
+          aws_account_id: 'accountType',
+          context: RecursiveOpenStruct.new,
+          stage: 'test'
+        })
+      end
     end
   end
 
