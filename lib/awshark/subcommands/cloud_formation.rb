@@ -2,6 +2,7 @@
 
 require 'aws-sdk-cloudformation'
 require 'diffy'
+require 'recursive-open-struct'
 
 require 'awshark/cloud_formation/file_loading'
 require 'awshark/cloud_formation/inferrer'
