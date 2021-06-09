@@ -28,16 +28,16 @@ module Awshark
 
       # @returns [Hash]
       def context
-        return { context: {}, stage: stage } if File.file?(path)
+        @context ||= begin
+                       context = load_file(context_path) || {}
+                       context = context[stage] if context.key?(stage)
 
-        context = load_file(context_path) || {}
-        context = context[stage] if context.key?(stage)
-
-        {
-          context: HashWithIndifferentAccess.new(context),
-          aws_account_id: Awshark.config.aws_account_id,
-          stage: stage
-        }
+                       {
+                         context: RecursiveOpenStruct.new(context),
+                         aws_account_id: Awshark.config.aws_account_id,
+                         stage: stage
+                       }
+                     end
       end
 
       # @returns [Integer]
