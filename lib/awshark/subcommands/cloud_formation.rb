@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'aws-sdk-cloudformation'
+require 'aws-sdk-ssm'
 require 'diffy'
 require 'recursive-open-struct'
 
