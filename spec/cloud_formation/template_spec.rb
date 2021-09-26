@@ -68,10 +68,11 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { json_path }
 
       it do
-        is_expected.to eq({
+        is_expected.to include({
           aws_account_id: 'accountType',
           context: RecursiveOpenStruct.new({ 'S3Bucket' => 'foo.bar.org' }),
-          stage: 'test'
+          stage: 'test',
+          ssm: anything
         })
       end
     end
@@ -80,7 +81,7 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { yaml_path }
 
       it do
-        is_expected.to eq({
+        is_expected.to include({
           aws_account_id: 'accountType',
           context: RecursiveOpenStruct.new({
             'QueueName' => 'Foo',
@@ -89,7 +90,8 @@ RSpec.describe Awshark::CloudFormation::Template do
               { 'Name'=>'bar', 'Type'=>'medium' }
             ],
           }),
-          stage: 'test'
+          stage: 'test',
+          ssm: anything
         })
       end
     end
@@ -98,10 +100,11 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { 'spec/fixtures/cloud_formation/yaml/template.yml' }
 
       it do
-        is_expected.to eq({
+        is_expected.to include({
           aws_account_id: 'accountType',
           context: RecursiveOpenStruct.new,
-          stage: 'test'
+          stage: 'test',
+          ssm: anything
         })
       end
     end
@@ -110,11 +113,18 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { 'spec/fixtures/cloud_formation/empty' }
 
       it do
-        is_expected.to eq({
+        is_expected.to include({
           aws_account_id: 'accountType',
           context: RecursiveOpenStruct.new,
-          stage: 'test'
+          stage: 'test',
+          ssm: anything
         })
+      end
+
+      it do
+        expect(Aws::SSM::Client).to receive_message_chain(:new, :get_parameter).with(hash_including(name: 'qwe'))
+
+        subject[:ssm]['qwe']
       end
     end
   end

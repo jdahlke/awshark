@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-ecr'
   spec.add_dependency 'aws-sdk-rds'
   spec.add_dependency 'aws-sdk-s3'
+  spec.add_dependency 'aws-sdk-ssm', '~> 1.117.0'
   spec.add_dependency 'diffy'
   spec.add_dependency 'mini_mime'
   spec.add_dependency 'recursive-open-struct'
