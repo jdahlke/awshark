@@ -28,16 +28,18 @@ module Awshark
 
       # @returns [Hash]
       def context
-        @context ||= begin
-                       context = load_file(context_path) || {}
-                       context = context[stage] if context.key?(stage)
+        @context ||=
+          begin
+            context = load_file(context_path) || {}
+            context = context[stage] if context.key?(stage)
 
-                       {
-                         context: RecursiveOpenStruct.new(context),
-                         aws_account_id: Awshark.config.aws_account_id,
-                         stage: stage
-                       }
-                     end
+            {
+              context: RecursiveOpenStruct.new(context),
+              aws_account_id: Awshark.config.aws_account_id,
+              stage: stage,
+              ssm: ssm
+            }
+          end
       end
 
       # @returns [Integer]
@@ -58,6 +60,13 @@ module Awshark
       end
 
       private
+
+      def ssm
+        proc do |key|
+          @ssm_client ||= Aws::SSM::Client.new
+          @ssm_client.get_parameter(name: key, with_decryption: true)&.parameter&.value
+        end
+      end
 
       def region
         Aws.config[:region] || 'eu-central-1'

@@ -12,7 +12,6 @@ AllCops:
     - 'spec/**/*'
     - 'tmp/*'
 
-
 Layout/BeginEndAlignment:
   Enabled: true
   EnforcedStyleAlignWith: begin

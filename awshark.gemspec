@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name = 'awshark'
   spec.version = Awshark::VERSION
   spec.authors = ['Joergen Dahlke']
-  spec.email = ['joergen.dahlke@infopark.de']
+  spec.email = ['joergen.dahlke@gmail.com']
 
   spec.summary = 'Custom CLI for for AWS related tasks'
   spec.description = 'Custom CLI for for AWS to simplify common tasks with EC2, S3 and Cloud Formation'
@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-ecr'
   spec.add_dependency 'aws-sdk-rds'
   spec.add_dependency 'aws-sdk-s3'
+  spec.add_dependency 'aws-sdk-ssm', '~> 1.117.0'
   spec.add_dependency 'diffy'
   spec.add_dependency 'mini_mime'
   spec.add_dependency 'recursive-open-struct'

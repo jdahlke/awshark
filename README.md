@@ -53,8 +53,8 @@ You can also run `bin/console` for an interactive prompt that will allow you to 
 To install this gem onto your local machine, run
 
     gem build awshark.gemspec
-    gem install --local awshark-0.1.0.gem
-    rm awshark-0.1.0.gem
+    gem install --local awshark-1.1.0.gem
+    rm awshark-1.1.0.gem
 
 
 ### Contributing
