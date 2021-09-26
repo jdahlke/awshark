@@ -62,11 +62,10 @@ module Awshark
       private
 
       def ssm
-        @ssm ||=
-          proc do |key|
-            @ssm_client ||= Aws::SSM::Client.new
-            @ssm_client.get_parameter(name: key, with_decryption: true)&.parameter&.value
-          end
+        proc do |key|
+          @ssm_client ||= Aws::SSM::Client.new
+          @ssm_client.get_parameter(name: key, with_decryption: true)&.parameter&.value
+        end
       end
 
       def region
