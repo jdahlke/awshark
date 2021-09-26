@@ -120,6 +120,10 @@ RSpec.describe Awshark::CloudFormation::Template do
           ssm: anything
         })
       end
+    end
+
+    context 'with ssm helper method' do
+      let(:path) { 'spec/fixtures/cloud_formation/yaml/template.yml' }
 
       it do
         expect(Aws::SSM::Client).to receive_message_chain(:new, :get_parameter).with(hash_including(name: 'qwe'))

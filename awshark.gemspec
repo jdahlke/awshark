@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name = 'awshark'
   spec.version = Awshark::VERSION
   spec.authors = ['Joergen Dahlke']
-  spec.email = ['joergen.dahlke@infopark.de']
+  spec.email = ['joergen.dahlke@gmail.com']
 
   spec.summary = 'Custom CLI for for AWS related tasks'
   spec.description = 'Custom CLI for for AWS to simplify common tasks with EC2, S3 and Cloud Formation'
