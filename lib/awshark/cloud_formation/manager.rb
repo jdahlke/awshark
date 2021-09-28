@@ -58,9 +58,19 @@ module Awshark
 
           sleep(event_polling)
         end
+
+        (id = options[:api_gateway]) && deploy_api_gateway(id)
       end
 
       private
+
+      def deploy_api_gateway(rest_api_id)
+        client = Aws::APIGateway::Client.new
+        client.create_deployment(
+          rest_api_id: rest_api_id,
+          stage_name: stage
+        )
+      end
 
       def event_polling
         Awshark.config.cloud_formation.event_polling || 3

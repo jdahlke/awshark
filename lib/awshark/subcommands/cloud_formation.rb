@@ -2,6 +2,7 @@
 
 require 'aws-sdk-cloudformation'
 require 'aws-sdk-ssm'
+require 'aws-sdk-apigateway'
 require 'diffy'
 require 'recursive-open-struct'
 
@@ -20,6 +21,7 @@ module Awshark
 
       class_option :bucket, type: :string, desc: 'S3 bucket for template'
       class_option :iam, type: :boolean, desc: 'Needs IAM capabilities'
+      class_option :api_gateway, type: :string, desc: 'Deploy updated API Gataway to stage'
       class_option :stage, type: :string, desc: 'Stage of the configuration'
 
       desc 'deploy', 'Updates or creates an AWS CloudFormation stack'
