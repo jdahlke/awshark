@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws-sdk-cloudwatch'
   spec.add_dependency 'aws-sdk-ec2'
   spec.add_dependency 'aws-sdk-ecr'
+  spec.add_dependency 'aws-sdk-ecs'
   spec.add_dependency 'aws-sdk-rds'
   spec.add_dependency 'aws-sdk-s3'
   spec.add_dependency 'aws-sdk-ssm', '~> 1.117.0'
