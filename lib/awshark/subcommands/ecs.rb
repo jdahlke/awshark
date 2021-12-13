@@ -1,11 +1,32 @@
 # frozen_string_literal: true
 
 require 'aws-sdk-ecr'
+require 'aws-sdk-ecs'
+
+require 'awshark/ecs/cluster'
+require 'awshark/ecs/manager'
 
 module Awshark
   module Subcommands
     class Ecs < Thor
       include Awshark::Subcommands::ClassOptions
+
+      desc 'list', 'list ECS tasks'
+      long_desc <<-LONGDESC
+        List all running ECS tasks and services.
+
+        Example: `awshark ecs list`
+      LONGDESC
+      def list
+        manager = Awshark::Ecs::Manager.new
+        manager.clusters.each do |cluster|
+          puts "\n"
+          puts manager.inspect_cluster(cluster)
+          cluster.services.each do |service|
+            puts manager.inspect_service(service)
+          end
+        end
+      end
 
       desc 'login', 'docker login to AWS ECR'
       long_desc <<-LONGDESC
