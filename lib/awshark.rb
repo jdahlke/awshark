@@ -6,13 +6,28 @@ require 'thor'
 require 'yaml'
 
 require 'awshark/version'
-require 'awshark/configuration'
+require 'awshark/cloud_formation/configuration'
+require 'awshark/ecs/configuration'
+require 'awshark/s3/configuration'
+require 'awshark/sts/configuration'
 
 module Awshark
   class GracefulFail < StandardError; end
 
   def self.config
-    @config ||= Configuration.new
+    @config ||= begin
+                  cf = CloudFormation::Configuration.new
+                  ecs = Ecs::Configuration.new
+                  s3 = S3::Configuration.new
+                  sts = Sts::Configuration.new
+
+                  OpenStruct.new(
+                    cloud_formation: cf,
+                    ecs: ecs,
+                    s3: s3,
+                    sts: sts
+                  )
+                end
   end
 
   def self.configure
