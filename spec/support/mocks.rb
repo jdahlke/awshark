@@ -4,12 +4,14 @@ module Mocks
   def self.stub_aws
     Awshark.config.send(:sts_client=, Aws::STS::Client.new(stub_responses: true))
     CloudFormation.stub
+    Ecs.stub
     S3.stub
   end
 
   def self.unstub_aws
     Awshark.config.send(:sts_client=, nil)
     CloudFormation.unstub
+    Ecs.unstub
     S3.unstub
   end
 
@@ -21,6 +23,17 @@ module Mocks
 
     def self.unstub
       Awshark.config.cloud_formation.client = nil
+    end
+  end
+
+  module Ecs
+    def self.stub
+      client = Aws::ECS::Client.new(region: 'us-east-1', stub_responses: true)
+      Awshark.config.ecs.client = client
+    end
+
+    def self.unstub
+      Awshark.config.ecs.client = nil
     end
   end
 
