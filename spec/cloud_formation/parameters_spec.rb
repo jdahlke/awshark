@@ -39,7 +39,7 @@ RSpec.describe Awshark::CloudFormation::Parameters do
     end
 
     context 'with no parameters file' do
-      let(:path) { "spec/fixtures/cloud_formation/empty" }
+      let(:path) { 'spec/fixtures/cloud_formation/empty' }
 
       it { is_expected.to eq({}) }
     end
@@ -52,12 +52,14 @@ RSpec.describe Awshark::CloudFormation::Parameters do
       let(:path) { json_path }
 
       it do
-        is_expected.to eq([
-          { parameter_key: 'HashKeyElementName', parameter_value: 'foo' },
-          { parameter_key: 'HashKeyElementType', parameter_value: 'N' },
-          { parameter_key: 'ReadCapacityUnits', parameter_value: 1 },
-          { parameter_key: 'WriteCapacityUnits', parameter_value: 1 }
-        ])
+        is_expected.to eq(
+          [
+            { parameter_key: 'HashKeyElementName', parameter_value: 'foo' },
+            { parameter_key: 'HashKeyElementType', parameter_value: 'N' },
+            { parameter_key: 'ReadCapacityUnits', parameter_value: 1 },
+            { parameter_key: 'WriteCapacityUnits', parameter_value: 1 }
+          ]
+        )
       end
     end
 
@@ -66,9 +68,7 @@ RSpec.describe Awshark::CloudFormation::Parameters do
       let(:stage) { 'test' }
 
       it do
-        is_expected.to eq([
-          { parameter_key: 'AlarmEMail', parameter_value: 'foo@example.com' }
-        ])
+        is_expected.to eq([{ parameter_key: 'AlarmEMail', parameter_value: 'foo@example.com' }])
       end
     end
 

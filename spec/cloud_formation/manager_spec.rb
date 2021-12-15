@@ -1,9 +1,9 @@
+# frozen_string_literal: true
 
 RSpec.describe Awshark::CloudFormation::Manager do
   let(:path) { 'spec/fixtures/cloud_formation/yaml' }
   let(:stage) { 'test' }
   let(:manager) { described_class.new(path, stage: stage, bucket: 'foobar') }
-
 
   describe '#stack' do
     it 'return CloudFormation::Stack' do
