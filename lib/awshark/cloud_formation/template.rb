@@ -35,7 +35,7 @@ module Awshark
 
             {
               context: RecursiveOpenStruct.new(context),
-              aws_account_id: Awshark.config.aws_account_id,
+              aws_account_id: Awshark.config.sts.aws_account_id,
               stage: stage,
               ssm: ssm
             }
@@ -69,13 +69,11 @@ module Awshark
       end
 
       def region
-        Aws.config[:region] || 'eu-central-1'
+        Awshark.config.s3.region
       end
 
       def s3
-        return Awshark.config.s3.client if Awshark.config.s3.client
-
-        @s3 ||= Aws::S3::Client.new(region: region, signature_version: 'v4')
+        Awshark.config.s3.client
       end
 
       def s3_key

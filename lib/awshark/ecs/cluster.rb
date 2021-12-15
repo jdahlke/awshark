@@ -32,10 +32,7 @@ module Awshark
       private
 
       def client
-        return Awshark.config.ecs.client if Awshark.config.ecs.client
-
-        region = Aws.config[:region] || 'eu-central-1'
-        @client ||= Aws::ECS::Client.new(region: region)
+        Awshark.config.ecs.client
       end
     end
   end
