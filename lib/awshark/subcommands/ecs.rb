@@ -18,6 +18,8 @@ module Awshark
         Example: `awshark ecs list`
       LONGDESC
       def list
+        process_class_options
+
         manager = Awshark::Ecs::Manager.new
         manager.clusters.each do |cluster|
           puts "\n"
@@ -40,7 +42,7 @@ module Awshark
 
         user_name = token.split(':').first
         password = token.split(':').last
-        url = "https://#{Awshark.config.aws_account_id}.dkr.ecr.eu-central-1.amazonaws.com"
+        url = "https://#{Awshark.config.sts.aws_account_id}.dkr.ecr.eu-central-1.amazonaws.com"
 
         `docker login -u #{user_name} -p #{password} #{url}`
       end
