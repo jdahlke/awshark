@@ -86,9 +86,9 @@ RSpec.describe Awshark::CloudFormation::Template do
           context: RecursiveOpenStruct.new({
             'QueueName' => 'Foo',
             'Instances' => [
-              { 'Name'=>'foo', 'Type'=>'small' },
-              { 'Name'=>'bar', 'Type'=>'medium' }
-            ],
+              { 'Name' => 'foo', 'Type' => 'small' },
+              { 'Name' => 'bar', 'Type' => 'medium' }
+            ]
           }),
           stage: 'test',
           ssm: anything

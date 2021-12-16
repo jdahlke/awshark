@@ -16,8 +16,6 @@ module Awshark
     map '-v' => :version
 
     class_option :help, type: :boolean, desc: 'Prints this help'
-    class_option :profile, type: :string, desc: 'Load the AWS credentials profile named PROFILE.'
-    class_option :region, type: :string, desc: 'Sets the AWS region name REGION.'
 
     desc 'cf COMMAND', 'Run CloudFormation command'
     subcommand 'cf', Awshark::Subcommands::CloudFormation

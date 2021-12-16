@@ -2,15 +2,13 @@
 
 module Awshark
   class ProfileResolver
-    attr_reader :region
-
     def initialize(options)
       @profile = options[:profile] || ENV['AWS_PROFILE']
       @shared_config = ::Aws::SharedConfig.new(
         profile_name: @profile,
         config_enabled: true
       )
-      @region = options[:region] || @shared_config.region || 'eu-central-1'
+      @region = options[:region] || ENV['REGION']
     end
 
     def credentials
@@ -30,6 +28,13 @@ module Awshark
     # @returns [Aws::Credentials]
     def user_credentials
       @shared_config.credentials
+    end
+
+    # Returns Aws region from option, env or .aws/config
+    #
+    # @returns [String]
+    def region
+      @region || @shared_config.region || 'eu-central-1'
     end
 
     # Returns Aws credentials for configuration with

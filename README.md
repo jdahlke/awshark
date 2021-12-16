@@ -14,32 +14,41 @@ gem install awshark
 
 ### Usage
 
+Use `AWS_PROFILE=PROFILE` and/or `AWS_REGION=REGION` to configure the internal AWS clients.
+
 #### S3 commands
 
 List all S3 buckets
 ```
-awshark s3 list --profile=AWS_PROFILE
+awshark s3 list
 ```
 
 List all objects in a specific S3 bucket
 ```
-awshark s3 objects BUCKET_NAME fonts/ --profile=AWS_PROFILE
+awshark s3 objects BUCKET_NAME fonts/
 ```
 
 #### EC2 commands
 
 List all EC2 instances in a region
 ```
-awshark ec2 list --profile=AWS_PROFILE
+awshark ec2 list
+```
+
+#### ECS commands
+
+List all EC2 instances in a region
+```
+awshark ecs list
 ```
 
 #### Cloud Formation commands
 
 Update (diff) Cloud Formation stack
 ```
-awshark cf deploy TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de --profile=AWS_PROFILE
+awshark cf deploy TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de
 
-awshark cf diff TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de --profile=AWS_PROFILE
+awshark cf diff TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de
 ```
 
 For a further information visit the [Wiki](https://github.com/jdahlke/awshark/wiki).
@@ -49,12 +58,6 @@ For a further information visit the [Wiki](https://github.com/jdahlke/awshark/wi
 
 After checking out the repo, run `bin/setup` to install dependencies.
 You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run
-
-    gem build awshark.gemspec
-    gem install --local awshark-1.1.0.gem
-    rm awshark-1.1.0.gem
 
 
 ### Contributing

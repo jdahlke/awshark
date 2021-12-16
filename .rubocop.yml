@@ -7,9 +7,6 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - 'bin/*'
-    - 'node_modules/**/*'
-    - 'vendor/**/*'
-    - 'spec/**/*'
     - 'tmp/*'
 
 Layout/BeginEndAlignment:
@@ -17,6 +14,9 @@ Layout/BeginEndAlignment:
   EnforcedStyleAlignWith: begin
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
+Layout/FirstHashElementIndentation:
+  Exclude:
+    - 'spec/**/*'
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
@@ -70,6 +70,10 @@ Lint/UselessTimes:
 Metrics/AbcSize:
   Enabled: true
   Max: 20
+Metrics/BlockLength:
+  Exclude:
+    - '*.gemspec'
+    - 'spec/**/*'
 Metrics/MethodLength:
   Enabled: false
 Metrics/ModuleLength:
