@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Awshark
-  module EC2
+  module Ec2
     class Manager
       def all_instances
         return @all_instances if defined?(@all_instances)
@@ -29,11 +29,7 @@ module Awshark
       private
 
       def client
-        @client ||= Aws::EC2::Client.new(region: region)
-      end
-
-      def region
-        Aws.config[:region] || 'eu-central-1'
+        Awshark.config.ec2.client
       end
     end
   end

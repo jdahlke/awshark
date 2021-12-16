@@ -21,7 +21,7 @@ module Awshark
     subcommand 'cf', Awshark::Subcommands::CloudFormation
 
     desc 'ec2 COMMAND', 'Run EC2 command'
-    subcommand 'ec2', Awshark::Subcommands::EC2
+    subcommand 'ec2', Awshark::Subcommands::Ec2
 
     desc 'ecs COMMAND', 'Run ECS command'
     subcommand 'ecs', Awshark::Subcommands::Ecs

@@ -7,6 +7,7 @@ require 'yaml'
 
 require 'awshark/version'
 require 'awshark/cloud_formation/configuration'
+require 'awshark/ec2/configuration'
 require 'awshark/ecs/configuration'
 require 'awshark/s3/configuration'
 require 'awshark/sts/configuration'
@@ -17,12 +18,14 @@ module Awshark
   def self.config
     @config ||= begin
                   cf = CloudFormation::Configuration.new
+                  ec2 = Ec2::Configuration.new
                   ecs = Ecs::Configuration.new
                   s3 = S3::Configuration.new
                   sts = Sts::Configuration.new
 
                   OpenStruct.new(
                     cloud_formation: cf,
+                    ec2: ec2,
                     ecs: ecs,
                     s3: s3,
                     sts: sts
