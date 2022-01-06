@@ -6,6 +6,7 @@ require 'thor'
 require 'yaml'
 
 require 'awshark/version'
+require 'awshark/concerns/logging'
 require 'awshark/cloud_formation/configuration'
 require 'awshark/ec2/configuration'
 require 'awshark/ecs/configuration'

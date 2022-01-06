@@ -43,7 +43,7 @@ module Awshark
       option :ports,
              type: :string,
              desc: 'Ports to register. Only uses ports from 1 to 65535.',
-             default: '80, 443'
+             default: '443'
       option :security_group,
              type: :string,
              required: true,
