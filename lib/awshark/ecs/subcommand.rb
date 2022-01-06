@@ -7,9 +7,9 @@ require 'awshark/ecs/cluster'
 require 'awshark/ecs/manager'
 
 module Awshark
-  module Subcommands
-    class Ecs < Thor
-      include Awshark::Subcommands::ClassOptions
+  module Ecs
+    class Subcommand < Thor
+      include Awshark::ClassOptions
 
       desc 'list', 'list ECS tasks'
       long_desc <<-LONGDESC

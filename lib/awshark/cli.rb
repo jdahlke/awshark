@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 require 'awshark/profile_resolver'
-
-require 'awshark/subcommands/class_options'
-require 'awshark/subcommands/cloud_formation'
-require 'awshark/subcommands/ec2'
-require 'awshark/subcommands/ecs'
-require 'awshark/subcommands/rds'
-require 'awshark/subcommands/s3'
+require 'awshark/class_options'
+require 'awshark/cloud_formation/subcommand'
+require 'awshark/ec2/subcommand'
+require 'awshark/ecs/subcommand'
+require 'awshark/rds/subcommand'
+require 'awshark/s3/subcommand'
 
 module Awshark
   class Cli < Thor
@@ -18,19 +17,19 @@ module Awshark
     class_option :help, type: :boolean, desc: 'Prints this help'
 
     desc 'cf COMMAND', 'Run CloudFormation command'
-    subcommand 'cf', Awshark::Subcommands::CloudFormation
+    subcommand 'cf', Awshark::CloudFormation::Subcommand
 
     desc 'ec2 COMMAND', 'Run EC2 command'
-    subcommand 'ec2', Awshark::Subcommands::Ec2
+    subcommand 'ec2', Awshark::Ec2::Subcommand
 
     desc 'ecs COMMAND', 'Run ECS command'
-    subcommand 'ecs', Awshark::Subcommands::Ecs
+    subcommand 'ecs', Awshark::Ecs::Subcommand
 
     desc 'rds COMMAND', 'Run RDS command'
-    subcommand 'rds', Awshark::Subcommands::Rds
+    subcommand 'rds', Awshark::Rds::Subcommand
 
     desc 's3 COMMAND', 'Run CloudFormation command'
-    subcommand 's3', Awshark::Subcommands::S3
+    subcommand 's3', Awshark::S3::Subcommand
 
     desc 'version', 'Displays current version of AwsShark'
     long_desc <<-LONGDESC
