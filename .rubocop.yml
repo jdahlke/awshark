@@ -69,7 +69,7 @@ Lint/UselessTimes:
 
 Metrics/AbcSize:
   Enabled: true
-  Max: 20
+  Max: 25
 Metrics/BlockLength:
   Exclude:
     - '*.gemspec'

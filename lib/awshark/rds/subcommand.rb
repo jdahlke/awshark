@@ -6,9 +6,9 @@ require 'awshark/rds/check_reservations'
 require 'awshark/rds/manager'
 
 module Awshark
-  module Subcommands
-    class Rds < Thor
-      include Awshark::Subcommands::ClassOptions
+  module Rds
+    class Subcommand < Thor
+      include Awshark::ClassOptions
 
       desc 'check', 'Check RDS reservations'
       long_desc <<-LONGDESC
