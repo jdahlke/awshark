@@ -14,9 +14,9 @@ require 'awshark/cloud_formation/stack_events'
 require 'awshark/cloud_formation/template'
 
 module Awshark
-  module Subcommands
-    class CloudFormation < Thor
-      include Awshark::Subcommands::ClassOptions
+  module CloudFormation
+    class Subcommand < Thor
+      include Awshark::ClassOptions
 
       class_option :bucket, type: :string, desc: 'S3 bucket for template'
       class_option :iam, type: :boolean, desc: 'Needs IAM capabilities'

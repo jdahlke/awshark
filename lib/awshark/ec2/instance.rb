@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Awshark
-  module EC2
+  module Ec2
     class Instance
       attr_reader :id
       attr_reader :type

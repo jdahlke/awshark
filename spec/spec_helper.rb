@@ -4,6 +4,8 @@ require 'awshark'
 
 require 'support/mocks'
 
+Awshark.logger.level = Logger::WARN
+
 RSpec.configure do |config|
   config.before(:suite) do
     Mocks.stub_aws

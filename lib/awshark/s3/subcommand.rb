@@ -9,9 +9,9 @@ require 'awshark/s3/bucket'
 require 'awshark/s3/manager'
 
 module Awshark
-  module Subcommands
-    class S3 < Thor
-      include Awshark::Subcommands::ClassOptions
+  module S3
+    class Subcommand < Thor
+      include Awshark::ClassOptions
       include ActiveSupport::NumberHelper
 
       desc 'list', 'List S3 bucket statistics'
