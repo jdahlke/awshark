@@ -70,6 +70,9 @@ module Awshark
              type: :string,
              required: true,
              desc: 'Security group to remove access from.'
+      option :username,
+             type: :string,
+             desc: 'Ports to register. Only uses ports from 1 to 65535.'
       def unauthorize
         process_class_options
 
