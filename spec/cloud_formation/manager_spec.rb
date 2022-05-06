@@ -23,4 +23,20 @@ RSpec.describe Awshark::CloudFormation::Manager do
       expect { manager.update_stack }.to_not raise_error
     end
   end
+
+  describe '#save_stack_template' do
+    after do
+      filename = 'yaml-test.json'
+      File.delete(filename) if File.exist?(filename)
+    end
+
+    it 'does not raise error' do
+      expect { manager.save_stack_template }.to_not raise_error
+    end
+
+    it 'writes Cloud Formation template to file' do
+      filename = manager.save_stack_template
+      expect(File.exist?(filename)).to be(true)
+    end
+  end
 end
