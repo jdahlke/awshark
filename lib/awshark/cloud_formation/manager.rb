@@ -46,6 +46,12 @@ module Awshark
         raise e
       end
 
+      def save_stack_template
+        filename = "#{stack.name}.json"
+        File.open(filename, 'w') { |f| f.write(template.body) }
+        filename
+      end
+
       def tail_stack_events
         stack.reload
         stack_events = StackEvents.new(stack)
