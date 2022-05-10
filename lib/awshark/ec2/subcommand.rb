@@ -50,7 +50,7 @@ module Awshark
              desc: 'Security group to allow access to.'
       option :username,
              type: :string,
-             desc: 'Ports to register. Only uses ports from 1 to 65535.'
+             desc: 'Optional user name (defaults to whoami).'
       def authorize
         process_class_options
 
@@ -72,7 +72,7 @@ module Awshark
              desc: 'Security group to remove access from.'
       option :username,
              type: :string,
-             desc: 'Ports to register. Only uses ports from 1 to 65535.'
+             desc: 'Optional user name (defaults to whoami).'
       def unauthorize
         process_class_options
 

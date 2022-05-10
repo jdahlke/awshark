@@ -63,6 +63,22 @@ module Awshark
         puts diff
       end
 
+      desc 'save', 'Save AWS CloudFormation JSON template as file'
+      long_desc <<-LONGDESC
+        Save AWS CloudFormation JSON template as file TEMPLATE_PATH/cloudformation-stage.json
+
+        Example: `awshark cf save TEMPLATE_PATH`
+      LONGDESC
+      def save(template_path)
+        process_class_options
+
+        manager = create_manager(template_path)
+        print_stack_information(manager.stack)
+
+        filename = manager.save_stack_template
+        printf "Written CloudFormation JSON template to: %<name>s\n\n", name: filename
+      end
+
       private
 
       def create_manager(template_path)
