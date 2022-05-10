@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.4.0
+- [new] add `awshark cf save` to save Cloud Formation templates as file
+
 #### 1.3.0
 - [new] add `awshark ec2 authorize` and `unauthorize`
 
