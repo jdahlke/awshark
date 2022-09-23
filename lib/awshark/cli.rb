@@ -15,6 +15,7 @@ module Awshark
     map '-v' => :version
 
     class_option :help, type: :boolean, desc: 'Prints this help'
+    class_option :region, type: :string, desc: 'AWS region'
 
     desc 'cf COMMAND', 'Run CloudFormation command'
     subcommand 'cf', Awshark::CloudFormation::Subcommand
