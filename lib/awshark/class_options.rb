@@ -11,7 +11,7 @@ module Awshark
         exit(0)
       end
 
-      setup_aws_credentials(options)
+      setup_aws_credentials(cli_options)
     end
 
     private

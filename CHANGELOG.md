@@ -1,7 +1,11 @@
 ## Changelog
 
+#### 1.5.0
+- [new] add `awshark ssm list` to list AWS Parameter Store secrets
+- [new] add `awshark ssm deploy` to update AWS Parameter Store secrets
+
 #### 1.4.0
-- [new] add `awshark cf save` to save Cloud Formation templates as file
+- [new] add `awshark cf save` to save AWS Cloud Formation templates as file
 
 #### 1.3.0
 - [new] add `awshark ec2 authorize` and `unauthorize`
