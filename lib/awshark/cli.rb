@@ -7,6 +7,7 @@ require 'awshark/ec2/subcommand'
 require 'awshark/ecs/subcommand'
 require 'awshark/rds/subcommand'
 require 'awshark/s3/subcommand'
+require 'awshark/ssm/subcommand'
 
 module Awshark
   class Cli < Thor
@@ -15,6 +16,7 @@ module Awshark
     map '-v' => :version
 
     class_option :help, type: :boolean, desc: 'Prints this help'
+    class_option :region, type: :string, desc: 'AWS region'
 
     desc 'cf COMMAND', 'Run CloudFormation command'
     subcommand 'cf', Awshark::CloudFormation::Subcommand
@@ -30,6 +32,9 @@ module Awshark
 
     desc 's3 COMMAND', 'Run CloudFormation command'
     subcommand 's3', Awshark::S3::Subcommand
+
+    desc 'ssm COMMAND', 'Run SSM command'
+    subcommand 'ssm', Awshark::Ssm::Subcommand
 
     desc 'version', 'Displays current version of AwsShark'
     long_desc <<-LONGDESC
