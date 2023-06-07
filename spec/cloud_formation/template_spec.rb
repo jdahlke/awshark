@@ -144,14 +144,26 @@ RSpec.describe Awshark::CloudFormation::Template do
     end
 
     context 'with bucket' do
-      let(:bucket) { 'foobar' }
+      let(:bucket) { 'my-bucket' }
       let(:template) do
         described_class.new(path, name: 'foo', stage: stage, bucket: bucket)
       end
 
       it 'returns S3 object url of template' do
         s3_key = "awshark/foo/#{Time.now.strftime('%Y-%m-%d')}.json"
-        is_expected.to eq("https://#{bucket}.s3.eu-central-1.amazonaws.com/#{s3_key}")
+        is_expected.to eq("https://my-bucket.s3.eu-central-1.amazonaws.com/#{s3_key}")
+      end
+    end
+
+    context 'with bucket and path' do
+      let(:bucket) { 'my-bucket/project/team' }
+      let(:template) do
+        described_class.new(path, name: 'foo', stage: stage, bucket: bucket)
+      end
+
+      it 'returns S3 object url of template' do
+        s3_key = "project/team/awshark/foo/#{Time.now.strftime('%Y-%m-%d')}.json"
+        is_expected.to eq("https://my-bucket.s3.eu-central-1.amazonaws.com/#{s3_key}")
       end
     end
   end
