@@ -11,7 +11,8 @@ module Awshark
       def initialize(path, options = {})
         @path = path
 
-        @bucket = options[:bucket]
+        @bucket_and_path = options[:bucket]
+        @bucket = (options[:bucket] || '').split('/')[0]
         @name = options[:name]
         @stage = options[:stage]
       end
@@ -77,8 +78,11 @@ module Awshark
       end
 
       def s3_key
-        # https://apidock.com/ruby/Time/strftime
-        @s3_key ||= "awshark/#{name}/#{Time.now.strftime('%Y-%m-%d')}.json"
+        return @s3_key if defined?(@s3_key)
+
+        _, *tail = @bucket_and_path.split('/')
+        prefix = [*tail, 'awshark', name].join('/')
+        @s3_key = "#{prefix}/#{Time.now.strftime('%Y-%m-%d')}.json"
       end
 
       def upload
