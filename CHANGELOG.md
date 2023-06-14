@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.5.1
+- [new] `awshark cf [command] --bucket` option allows S3 path prefix
+
 #### 1.5.0
 - [new] add `awshark ssm list` to list AWS Parameter Store secrets
 - [new] add `awshark ssm deploy` to update AWS Parameter Store secrets
