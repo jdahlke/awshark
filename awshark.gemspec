@@ -42,8 +42,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mini_mime'
   spec.add_dependency 'recursive-open-struct'
   spec.add_dependency 'thor', '~> 1.0'
-
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'rspec', '~> 3.9.0'
-  spec.add_development_dependency 'rubocop', '0.93.1'
 end

@@ -40,7 +40,7 @@ RSpec.describe Awshark::S3::Artifact do
   describe '#content_type' do
     examples = {
       '' => 'application/octet-stream',
-      'build/index.js' => 'application/javascript',
+      'build/index.js' => 'text/javascript',
       'vimeo_widget.6998f1c45d892fca1d57a35828161e50.svg' => 'image/svg+xml',
       'foo/bar.jpg' => 'image/jpeg',
       'foo/bar.jpg.pdf' => 'application/pdf'

@@ -48,7 +48,7 @@ module Awshark
 
       def save_stack_template
         filename = "#{stack.name}.json"
-        File.open(filename, 'w') { |f| f.write(template.body) }
+        File.write(filename, template.body)
         filename
       end
 
