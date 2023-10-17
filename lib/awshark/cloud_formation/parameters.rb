@@ -3,7 +3,7 @@
 module Awshark
   module CloudFormation
     class Parameters
-      include FileLoading
+      include Files
 
       attr_reader :stage
 
@@ -34,7 +34,7 @@ module Awshark
       private
 
       def load_parameters(filepath)
-        data = load_file(filepath) || {}
+        data = parse_file(filepath) || {}
 
         data[stage] || data
       end

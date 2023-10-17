@@ -5,7 +5,7 @@ require 'aws-sdk-ssm'
 require 'diffy'
 require 'recursive-open-struct'
 
-require 'awshark/cloud_formation/file_loading'
+require 'awshark/cloud_formation/files'
 require 'awshark/cloud_formation/inferrer'
 require 'awshark/cloud_formation/manager'
 require 'awshark/cloud_formation/parameters'
@@ -21,6 +21,7 @@ module Awshark
       class_option :bucket, type: :string, desc: 'S3 bucket for template'
       class_option :iam, type: :boolean, desc: 'Needs IAM capabilities'
       class_option :stage, type: :string, desc: 'Stage of the configuration'
+      class_option :format, type: :string, desc: 'Stage of the configuration', default: 'json'
 
       desc 'deploy', 'Updates or creates an AWS CloudFormation stack'
       long_desc <<-LONGDESC

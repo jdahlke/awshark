@@ -79,7 +79,7 @@ module Awshark
                      @stack = nil
                    end
 
-        return unless @stack.present?
+        return unless response.present?
 
         if response.stacks.length > 1
           raise ArgumentError, "Found too many stacks with name #{stack_name}. There should only be one."
