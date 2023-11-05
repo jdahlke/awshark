@@ -77,8 +77,9 @@ module Awshark
                      client.describe_stacks(stack_name: stack_name)
                    rescue Aws::CloudFormation::Errors::ValidationError
                      @stack = nil
-                     return
                    end
+
+        return unless response.present?
 
         if response.stacks.length > 1
           raise ArgumentError, "Found too many stacks with name #{stack_name}. There should only be one."

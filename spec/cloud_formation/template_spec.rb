@@ -1,24 +1,25 @@
 # frozen_string_literal: true
 
 RSpec.describe Awshark::CloudFormation::Template do
-  let(:template) { described_class.new(path, name: 'foo', stage: stage) }
+  let(:template) { described_class.new(path, name: 'foo', stage: stage, format: format) }
   let(:stage) { nil }
+  let(:format) { 'json' }
 
   json_path = 'spec/fixtures/cloud_formation/json'
   yaml_path = 'spec/fixtures/cloud_formation/yaml'
   json_filepath = 'spec/fixtures/cloud_formation/json/template.json'
   yaml_filepath = 'spec/fixtures/cloud_formation/yaml/template.yaml'
 
-  describe '#as_json' do
-    subject { template.as_json }
+  describe '#body' do
+    subject { template.body }
 
     context "with directory path #{json_path}" do
       let(:path) { json_path }
 
-      it { is_expected.to be_a(Hash) }
+      it { is_expected.to be_a(String) }
 
       it 'contains the DynamoDB key schema' do
-        properties = subject['Resources']['myDynamoDBTable']['Properties']
+        properties = JSON.parse(subject)['Resources']['myDynamoDBTable']['Properties']
         expect(properties['KeySchema']).to be_present
       end
     end
@@ -27,10 +28,10 @@ RSpec.describe Awshark::CloudFormation::Template do
       let(:path) { yaml_path }
       let(:stage) { 'test' }
 
-      it { is_expected.to be_a(Hash) }
+      it { is_expected.to be_a(String) }
 
       it 'contains the correct queue name' do
-        properties = subject['Resources']['TestQueue']['Properties']
+        properties = JSON.parse(subject)['Resources']['TestQueue']['Properties']
         expect(properties['QueueName']).to eq('Foo')
       end
     end
@@ -38,26 +39,33 @@ RSpec.describe Awshark::CloudFormation::Template do
     context "with file path #{json_filepath}" do
       let(:path) { json_filepath }
 
-      it { is_expected.to be_a(Hash) }
+      it { is_expected.to be_a(String) }
     end
 
     context "with file path #{yaml_filepath}" do
       let(:path) { yaml_filepath }
 
-      it { is_expected.to be_a(Hash) }
+      it { is_expected.to be_a(String) }
 
       it 'contains the correct queue name' do
-        properties = subject['Resources']['TestQueue']['Properties']
+        properties = JSON.parse(subject)['Resources']['TestQueue']['Properties']
         expect(properties['QueueName']).to be_nil
       end
     end
-  end
 
-  describe '#body' do
-    subject { template.body }
-    let(:path) { yaml_path }
+    context 'with format NOT json' do
+      let(:path) { yaml_path }
+      let(:stage) { 'test' }
+      let(:format) { 'none' }
 
-    it { is_expected.to be_a(String) }
+      it { is_expected.to be_a(String) }
+
+      it 'contains the correct queue name' do
+        hash = YAML.safe_load(subject, permitted_classes: [Date, Time])
+        properties = hash['Resources']['TestQueue']['Properties']
+        expect(properties['QueueName']).to eq('Foo')
+      end
+    end
   end
 
   describe '#context' do

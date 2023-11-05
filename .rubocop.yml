@@ -4,10 +4,19 @@
 # See https://docs.rubocop.org/rubocop/configuration
 
 AllCops:
-  TargetRubyVersion: 2.7
+  NewCops: enable
+  TargetRubyVersion: 3.1
   Exclude:
     - 'bin/*'
     - 'tmp/*'
+
+Bundler/GemFilename:
+  EnforcedStyle: gems.rb
+
+Gemspec/RequireMFA:
+  Enabled: false
+Gemspec/RequiredRubyVersion:
+  Enabled: false
 
 Layout/BeginEndAlignment:
   Enabled: true
@@ -67,6 +76,7 @@ Lint/UselessMethodDefinition:
 Lint/UselessTimes:
   Enabled: true
 
+
 Metrics/AbcSize:
   Enabled: true
   Max: 25
@@ -85,6 +95,8 @@ Style/ExponentialNotation:
   Enabled: true
 Style/HashEachMethods:
   Enabled: true
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
 Style/HashTransformKeys:
   Enabled: true
 Style/HashTransformValues:
@@ -117,6 +129,8 @@ Style/HashLikeCase:
   Enabled: true
 Style/KeywordParametersOrder:
   Enabled: true
+Style/OpenStructUse:
+  Enabled: false
 Style/OptionalBooleanParameter:
   Enabled: true
 Style/RedundantAssignment:

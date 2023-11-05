@@ -27,7 +27,7 @@ RSpec.describe Awshark::CloudFormation::Manager do
   describe '#save_stack_template' do
     after do
       filename = 'yaml-test.json'
-      File.delete(filename) if File.exist?(filename)
+      FileUtils.rm_f(filename)
     end
 
     it 'does not raise error' do

@@ -3,12 +3,12 @@
 module Awshark
   class ProfileResolver
     def initialize(options)
-      @profile = options[:profile] || ENV['AWS_PROFILE']
+      @profile = options[:profile] || ENV.fetch('AWS_PROFILE')
       @shared_config = ::Aws::SharedConfig.new(
         profile_name: @profile,
         config_enabled: true
       )
-      @region = options[:region] || ENV['REGION']
+      @region = options[:region] || ENV.fetch('REGION', nil)
     end
 
     def credentials

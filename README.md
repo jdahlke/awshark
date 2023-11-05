@@ -47,12 +47,12 @@ awshark ecs list
 
 Display changes to AWS Cloud Formation stack.
 ```
-awshark cf diff TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de
+awshark cf diff TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de --format=json|yaml
 ```
 
 Update or create AWS Cloud Formation stack.
 ```
-awshark cf deploy TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de
+awshark cf deploy TEMPLATE_PATH --stage=STAGE --bucket=S3_BUCKET.bundesimmo.de --format=json|yaml
 ```
 
 Save AWS Cloud Formation stack as file `STACK_NAME-STAGE.json`.
