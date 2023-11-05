@@ -3,10 +3,10 @@
 module Awshark
   module CloudFormation
     class Template
-      include FileLoading
+      include Files
 
       attr_reader :path
-      attr_reader :bucket, :name, :stage
+      attr_reader :bucket, :name, :stage, :format
 
       def initialize(path, options = {})
         @path = path
@@ -15,23 +15,29 @@ module Awshark
         @bucket = (options[:bucket] || '').split('/')[0]
         @name = options[:name]
         @stage = options[:stage]
+        @format = options[:format] || 'yaml'
       end
 
-      # @returns [Hash]
-      def as_json
-        load_file(template_path, context)
-      end
-
-      # @returns [String]
+      # @returns String
       def body
-        JSON.pretty_generate(as_json)
+        return nil if template_path.blank?
+
+        content = File.read(template_path)
+        content = ERB.new(content).result_with_hash(context)
+
+        if format == 'json'
+          json = parse_string(template_path, content)
+          return JSON.pretty_generate(json)
+        end
+
+        content
       end
 
       # @returns [Hash]
       def context
         @context ||=
           begin
-            context = load_file(context_path) || {}
+            context = parse_file(context_path) || {}
             context = context[stage] if context.key?(stage)
 
             {
