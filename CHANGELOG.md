@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 1.6.0
+- [new] `awshark cf [command] --format` option to export CF template not always as JSON ()
+
 #### 1.5.1
 - [new] `awshark cf [command] --bucket` option allows S3 path prefix
 
